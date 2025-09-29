@@ -1,34 +1,30 @@
-version: '3.8'
+# Coolify Configuration for AstroWind with Nixpacks
+# This file configures the deployment settings for Coolify
 
-services:
-  astrowind:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: astrowind
-    restart: unless-stopped
-    environment:
-      - NODE_ENV=production
-    networks:
-      - traefik
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.http.routers.astrowind.rule=Host(`your-domain.com`)'
-      - 'traefik.http.routers.astrowind.entrypoints=websecure'
-      - 'traefik.http.routers.astrowind.tls.certresolver=letsencrypt'
-      - 'traefik.http.services.astrowind.loadbalancer.server.port=3000'
-      - 'traefik.docker.network=traefik'
-      - 'coolify.managed=true'
-      - 'coolify.type=application'
-      - 'coolify.healthcheck.path=/health'
-      - 'coolify.healthcheck.port=3000'
-    healthcheck:
-      test: ['CMD', 'wget', '--quiet', '--tries=1', '--spider', 'http://localhost:3000/health']
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+# Build Configuration
+buildpack: nixpacks
+buildCommand: npm run build
+startCommand: npx serve dist -p 3000
 
-networks:
-  traefik:
-    external: true
+# Environment Variables
+environment:
+  NODE_ENV: production
+  PORT: 3000
+
+# Traefik Labels for Reverse Proxy
+labels:
+  - 'traefik.enable=true'
+  - 'traefik.http.routers.astrowind.rule=Host(`romahomestore.com`)'
+  - 'traefik.http.routers.astrowind.entrypoints=websecure'
+  - 'traefik.http.routers.astrowind.tls.certresolver=letsencrypt'
+  - 'traefik.http.services.astrowind.loadbalancer.server.port=3000'
+  - 'traefik.docker.network=traefik'
+
+# Health Check
+healthcheck:
+  path: /
+  port: 3000
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 40s

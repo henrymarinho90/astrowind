@@ -12,6 +12,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "serve": "npx serve dist -p 3000",
     "astro": "astro",
     "check": "npm run check:astro && npm run check:eslint && npm run check:prettier",
     "check:astro": "astro check",
