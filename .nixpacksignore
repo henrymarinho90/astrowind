@@ -1,0 +1,37 @@
+# Nixpacks ignore file
+# Files and directories to exclude from the build context
+
+# Development files
+.vscode/
+.github/
+*.log
+.DS_Store
+
+# Build artifacts (will be generated)
+dist/
+.output/
+
+# Dependencies (will be installed)
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Documentation
+README.md
+DEPLOYMENT.md
+LICENSE.md
+
+# Git
+.git/
+.gitignore
+
+# IDE files
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db

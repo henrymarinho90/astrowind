@@ -3,13 +3,14 @@
 
 # Build Configuration
 buildpack: nixpacks
-buildCommand: npm run build
+buildCommand: npm ci && npm run build
 startCommand: npx serve dist -p 3000
 
 # Environment Variables
 environment:
   NODE_ENV: production
   PORT: 3000
+  NIXPACKS_NO_CACHE: 'false'
 
 # Traefik Labels for Reverse Proxy
 labels:

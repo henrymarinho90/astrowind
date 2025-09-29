@@ -1,8 +1,8 @@
-[phases.setup]
-nixPkgs = ["nodejs", "npm"]
+# Minimal Nixpacks configuration for Astro
+# Let Nixpacks auto-detect Node.js and npm
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["npm install"]
 
 [phases.build]
 cmds = ["npm run build"]
